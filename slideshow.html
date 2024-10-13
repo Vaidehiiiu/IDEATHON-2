@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Slideshow</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #slideshow {
+            position: relative;
+            width: 80%;
+            margin: auto;
+            overflow: hidden; /* Ensure overflow is hidden */
+            border-radius: 10px;
+        }
+
+        #slideshow img {
+            position: absolute;
+            width: 100%; /* Make the images responsive */
+            height: auto;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 1s ease; /* Smooth transition for opacity */
+        }
+
+        #slideshow img.active {
+            opacity: 1; /* Show only the active image */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simple Slideshow</h1>
+    </header>
+
+    <div id="slideshow">
+        <img class="active" src="./static/restaurant1.jpg" alt="restaurant1">
+        <img src="./static/restaurant2.jpg" alt="restaurant2">
+        <img src="./static/restaurant3.jpg" alt="restaurant3">
+        <img src="./static/restaurant4.png" alt="restaurant4">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const images = document.querySelectorAll('#slideshow img');
+            let currentIndex = 0;
+
+            // Set the first image as active
+            if (images.length > 0) {
+                images[currentIndex].classList.add('active');
+            }
+
+            function showNextImage() {
+                images[currentIndex].classList.remove('active'); // Hide current image
+
+                // Update the index
+                currentIndex = (currentIndex + 1) % images.length; // Loop back to the first image
+
+                images[currentIndex].classList.add('active'); // Show the next image
+            }
+
+            // Change the image every 5 seconds
+            setInterval(showNextImage, 5000);
+        });
+    </script>
+</body>
+</html>
